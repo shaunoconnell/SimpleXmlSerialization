@@ -5,7 +5,7 @@ require 'rexml/xpath'
 require 'rexml/document'
 
 class Widget
-  include SimpleSerialization::BasicXmlSerializatoin
+  include SimpleSerialization::BasicXmlSerialization
   attr_accessor :name, :type, :description
 end
 

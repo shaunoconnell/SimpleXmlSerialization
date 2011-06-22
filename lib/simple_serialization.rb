@@ -3,15 +3,19 @@ require 'rexml/document'
 require 'rexml/element'
 
 module SimpleSerialization
-    module BasicXmlSerializatoin
-      def to_xml
+    module BasicXmlSerialization
+      def to_xml(options={})
         xml_doc = REXML::Document.new
-        xml_doc << REXML::XMLDecl.new
         root_element = xml_doc.add_element self.class.to_s.downcase
         serializable_attributes.each do |name, value|
           attr_element = root_element.add_element name
           attr_element.text = value
         end
+
+        unless options[:builder].nil?
+          options[:builder].text! xml_doc.to_s
+        end
+
         xml_doc.to_s
       end
 
